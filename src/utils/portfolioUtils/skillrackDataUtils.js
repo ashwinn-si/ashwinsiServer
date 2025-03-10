@@ -3,7 +3,7 @@ const axios = require('axios');
 require("dotenv").config();
 
 const skillrackDataUtils = async() => {
-    try{
+    
         const url = process.env.SKILLRACK_URL
         const urlParams = new URLSearchParams(new URL(url).search);
         const id = urlParams.get('id');
@@ -33,10 +33,7 @@ const skillrackDataUtils = async() => {
             totalProblemsSolved
         }
         
-    }catch(err){
-        console.log(err);
-        return {};
-    }
+    
     
 }
 
