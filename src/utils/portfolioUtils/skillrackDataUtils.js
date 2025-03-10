@@ -34,6 +34,7 @@ const skillrackDataUtils = async() => {
         }
         
     }catch(err){
+        console.log(err);
         return {};
     }
     
