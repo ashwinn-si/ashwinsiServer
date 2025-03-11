@@ -8,15 +8,10 @@ const skillrackDataUtils = async () => {
         if (!url) throw new Error("SKILLRACK_URL is not set in the environment variables.");
 
         // Setting headers to mimic a browser
-        const headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
-            "Referer": "https://www.skillrack.com/",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Connection": "keep-alive"
-        };
+        
 
         // Fetch the webpage
-        const { data } = await axios.get(url, { headers });
+        const { data } = await axios.get(url);
         const $ = cheerio.load(data);
 
         // Extracting required data
