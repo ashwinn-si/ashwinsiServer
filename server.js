@@ -6,7 +6,7 @@ const portfolioRouter = require("./src/routes/portfolio");
 
 app.use(express.json());
 app.use(cors({
-  origin: "*"
+  origin: "https://portfolio-ashwinsi.vercel.app"
 }));
 
 
