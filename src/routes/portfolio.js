@@ -5,7 +5,7 @@ const skillrackDataController = require('../controllers/portfolioControllers/ski
 const leetcodeDataController = require('../controllers/portfolioControllers/leetcodeDataController')
 const verifyRequest = require('./../middlewares/authRequest')
 
-router.get("/skillrackData", verifyRequest, skillrackDataController);
+router.get("/skillrackData", skillrackDataController);
 
 router.get("/leetcodeData", verifyRequest, leetcodeDataController);
 
