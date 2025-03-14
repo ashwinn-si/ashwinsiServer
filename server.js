@@ -6,7 +6,7 @@ const dbConnect = require("./src/utils/dbConnect")
 
 app.use(express.json());
 app.use(cors({
-  origin: "https://portfolio-ashwinsi.vercel.app"
+  origin: "*"
 }));
 
 
