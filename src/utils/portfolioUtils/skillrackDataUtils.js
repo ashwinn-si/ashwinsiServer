@@ -34,7 +34,7 @@ const skillrackDataUtils = async () => {
             totalProblemsSolved
         };
     } catch (error) {
-        console.error("❌ Error fetching SkillRack data:", error.message);
+        console.error("❌ Error fetching SkillRack data:", error);
         return null;
     }
 };
