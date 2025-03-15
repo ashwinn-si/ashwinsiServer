@@ -12,6 +12,7 @@ const skillrackDataUtils = async () => {
 
         // Fetch the webpage
         const { data } = await axios.get(url);
+        console.log(data);
         const $ = cheerio.load(data);
 
         // Extracting required data
