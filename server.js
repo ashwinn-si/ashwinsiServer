@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors({
   origin: "*"
 }));
-
+app.set('trust proxy', 1);
 
 app.use("/portfolio", portfolioRouter);
 

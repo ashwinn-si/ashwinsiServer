@@ -2,6 +2,7 @@ const portfolioModel = require("./../../models/portfolioModel")
 
 const countController = async (req, res) => {
     try{
+        console.log("started to fetch")
         const text = "new viwer"
         const count = await portfolioModel.find();
         const newDetails = new portfolioModel({text});
