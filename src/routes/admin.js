@@ -6,5 +6,5 @@ const countController = require("../controllers/adminController/countController"
 
 
 Router.get("/portfolio/count/date", dateController)
-Router.get("/portfolio/count", countController)
+Router.get("code", countController)
 module.exports = Router;
