@@ -8,6 +8,6 @@ const countController = require('../controllers/portfolioControllers/countContro
 
 router.get("/skillrackData", skillrackDataController);
 router.get("/leetcodeData", verifyRequest, leetcodeDataController);
-router.post("/count", countController);
+router.get("/count", countController);
 
 module.exports = router
