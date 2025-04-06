@@ -8,11 +8,28 @@ const dateController = async (req, res) => {
             "-_id",
         ]);
         const markData = await InternalMarkModel.find({}).select([
-            
+            "mark",
+            "nptel",
+            "bonus",
             "-_id"
         ]);
 
-        console.log(markData)
+        let responseMarkData = {
+            mark : [],
+            nptel : 0,
+            bonus : 0
+        }
+
+        markData.forEach((element) => {
+            if(element.nptel === "yes"){
+                responseMarkData.nptel += 1;
+            }
+            if(element.bonus === "yes"){
+                responseMarkData.bonus += 1;
+            }
+            responseMarkData.mark.push(parseInt(element.mark))
+        })
+
         const filteredData = viewData
             .filter((element) => {
                 const createdAtUTC = new Date(element.createdAt)
@@ -33,6 +50,15 @@ const dateController = async (req, res) => {
         res.status(200).send({
             status: "success",
             viewsData: filteredData,
+            nptelData : {
+                pass : responseMarkData.nptel,
+                fail : filteredData.length - responseMarkData.nptel
+            },
+            bonusData : {
+                pass : responseMarkData.bonus,
+                fail : filteredData.length - responseMarkData.bonus
+            },
+            markData : responseMarkData.mark,
             length: filteredData.length,
         });
     } catch (e) {
