@@ -4,9 +4,11 @@ const router = express.Router();
 const internalMarkModel = require("../models/internalMark")
 
 const addMarkController = require("../controllers/internalMarkController/addMark")
-
+const dateController = require("./../controllers/internalMarkController/dateController")
 
 router.post("/addMark", addMarkController)
+
+router.get("/count/date", dateController);
 
 router.get("/getCount", async (req, res) => {
     try{

@@ -3,7 +3,9 @@ const internalMarkModel = require("../../models/internalMark")
 const addMarkController = async(req, res) => {
     try{
         const newMark = new internalMarkModel({
-        mark : req.body.mark
+        mark : req.body.mark,
+        nptel : req.body.nptel,
+        bonus : req.body.bonus
     })
         newMark.save();
         res.status(200).json({message: "mark added"});
