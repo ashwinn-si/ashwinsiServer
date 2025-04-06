@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const internalMarkCalCountModel = require("../models/internalMarkCalCount");
 const internalMarkModel = require("../models/internalMark")
 
-const addSessionController = require("../controllers/internalMarkController/addSession")
 const addMarkController = require("../controllers/internalMarkController/addMark")
 
-router.get("/addSession", addSessionController)
 
 router.post("/addMark", addMarkController)
 

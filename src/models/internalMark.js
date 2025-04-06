@@ -1,7 +1,9 @@
 const mongoose = require("mongoose")
 
 const internalMarkSchema = new mongoose.Schema({
-    mark : "String"
+    mark : "String",
+    nptel : "String",
+    bonus : "String"
 },{
     timestamps : true
 })
