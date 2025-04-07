@@ -11,7 +11,8 @@ const dateController = async (req, res) => {
             "mark",
             "nptel",
             "bonus",
-            "-_id"
+            "createdAt",
+            "-_id",
         ]);
 
         let responseMarkData = {
@@ -19,16 +20,23 @@ const dateController = async (req, res) => {
             nptel : 0,
             bonus : 0
         }
-
-        markData.forEach((element) => {
-            if(element.nptel === "yes"){
+        
+        const filteredMarkData = markData.filter((element) => {
+                const createdAtUTC = new Date(element.createdAt)
+                    .toISOString()
+                    .split("T")[0];
+                return createdAtUTC === date;
+            })
+      
+        filteredMarkData.forEach((element) => {
+            if (element.nptel === "yes") {
                 responseMarkData.nptel += 1;
             }
-            if(element.bonus === "yes"){
+            if (element.bonus === "yes") {
                 responseMarkData.bonus += 1;
             }
-            responseMarkData.mark.push(parseInt(element.mark))
-        })
+            responseMarkData.mark.push(parseInt(element.mark));
+        });
 
         const filteredData = viewData
             .filter((element) => {
@@ -46,19 +54,19 @@ const dateController = async (req, res) => {
                     time: createdAtIST.split(",")[1].trim().split(" ")[0],
                 };
             });
-
+        
         res.status(200).send({
             status: "success",
             viewsData: filteredData,
-            nptelData : {
-                pass : responseMarkData.nptel,
-                fail : filteredData.length - responseMarkData.nptel
+            nptelData: {
+                pass: responseMarkData.nptel,
+                fail: filteredData.length - responseMarkData.nptel,
             },
-            bonusData : {
-                pass : responseMarkData.bonus,
-                fail : filteredData.length - responseMarkData.bonus
+            bonusData: {
+                pass: responseMarkData.bonus,
+                fail: filteredData.length - responseMarkData.bonus,
             },
-            markData : responseMarkData.mark,
+            markData: responseMarkData.mark,
             length: filteredData.length,
         });
     } catch (e) {
