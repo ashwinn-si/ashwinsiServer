@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const userModel = require("./../../models/UserModel")
-require("dotenv").config
+require("dotenv").config()
 
 const loginController = async(req, res) =>{
     try{
@@ -29,6 +29,7 @@ const loginController = async(req, res) =>{
         res.cookie("jwtToken", token, {
             secure: true,
             httpOnly: true,
+            sameSite: "None",
             maxAge: 60 * 15 * 1000,
         });
 

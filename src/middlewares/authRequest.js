@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const authRequest = (req, res, next) => {
     const token = req.cookies.jwtToken; // 👈 Get token from HTTP-only cookie
-
+    
     if (!token) {
         return res
             .status(401)
