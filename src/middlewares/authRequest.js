@@ -1,21 +1,21 @@
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
-const authRequest = async(req, res, next) => {
-    const token = req.headers.authorization;
+const authRequest = (req, res, next) => {
+    const token = req.cookies.jwtToken; // 👈 Get token from HTTP-only cookie
 
-    if( !token || !token.startsWith("Bearer ")) {
-        return res.status(401).json({message: "Unauthorized"});
-    }
-    const checkToken = token.split(" ")[1];
-
-    if( !checkToken ) {
-        return res.status(401).json({message: "Unauthorized"});
+    if (!token) {
+        return res
+            .status(401)
+            .json({ message: "Unauthorized: No token found" });
     }
 
-    if( checkToken !== process.env.TOKEN ) {
-        return res.status(401).json({message: "Unauthorized"});
+    try {
+        const result = jwt.verify(token, process.env.JWT_TOKEN);
+        next();
+    } catch (err) {
+        return res.status(401).json({ message: "Unauthorized: Invalid token" });
     }
-    next();
-}
+};
 
-module.exports = authRequest
+module.exports = authRequest;

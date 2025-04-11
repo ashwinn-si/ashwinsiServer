@@ -1,15 +1,32 @@
 const express = require("express");
 const app = express();
 const cors = require("cors"); 
+const cookieParser = require("cookie-parser")
 const portfolioRouter = require("./src/routes/portfolio");
 const adminRouter = require("./src/routes/admin");
 const dbConnect = require("./src/utils/dbConnect")
 const internalRoute = require("./src/routes/internalMarkCal")
 
 app.use(express.json());
-app.use(cors({
-  origin: "*"
-}));
+
+const allowedOrigins = [
+    // "http://localhost:5173",
+    "https://portfolio-ashwinsi.vercel.app", 
+];
+
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        credentials: true,
+    })
+);
+app.use(cookieParser());
 app.set('trust proxy', 1);
 
 app.use("/portfolio", portfolioRouter);
