@@ -11,6 +11,7 @@ app.use(express.json());
 
 const allowedOrigins = [
     // "http://localhost:5173",
+    "https://ashwinn-si.github.io/internal_mark_cal_2nd_3rd_year/",
     "https://portfolio-ashwinsi.vercel.app", 
 ];
 
