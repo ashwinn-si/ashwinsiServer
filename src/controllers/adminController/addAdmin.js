@@ -6,7 +6,7 @@ require("dotenv").config();
 const addAdminController = async(req, res) =>{
     try{
         const {username, password} = req.body;
-
+        console.log("hello daaaa")
         const hashPassword = await bcrypt.hash(password, 11);
         
         const newAdmin = new userModel({
@@ -17,7 +17,7 @@ const addAdminController = async(req, res) =>{
         await newAdmin.save();
         res.status(201).json({"message":"admin created"});
     }catch(e){
-        console.log(e);
+        console.log(e)
         res.status(500).json({"message":"Internal server error"});
     }
     

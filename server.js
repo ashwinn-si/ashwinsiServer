@@ -2,17 +2,21 @@ const express = require("express");
 const app = express();
 const cors = require("cors"); 
 const cookieParser = require("cookie-parser")
+
 const portfolioRouter = require("./src/routes/portfolio");
 const adminRouter = require("./src/routes/admin");
 const dbConnect = require("./src/utils/dbConnect")
 const internalRoute = require("./src/routes/internalMarkCal")
+const gpaCgpaCal = require("./src/routes/gpaCgpaCal")
 
 app.use(express.json());
 
 const allowedOrigins = [
-    // "http://localhost:5173",
+    "http://localhost:5173",
     "https://ashwinn-si.github.io",
-    "https://portfolio-ashwinsi.vercel.app", 
+    "https://portfolio-ashwinsi.vercel.app",
+    "http://localhost:3000",
+    "https://cgpa-gpa-calculator-two.vercel.app",
 ];
 
 app.use(
@@ -33,6 +37,7 @@ app.set('trust proxy', 1);
 app.use("/portfolio", portfolioRouter);
 app.use("/admin", adminRouter)
 app.use("/internalMark", internalRoute)
+app.use("/gpa-cgpa-cal", gpaCgpaCal);
 
 dbConnect();
 app.listen(5000, () => {
