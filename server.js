@@ -11,16 +11,18 @@ const gpaCgpaCal = require("./src/routes/gpaCgpaCal")
 const bdayRoute = require("./src/routes/bday")
 
 app.use(express.json());
-
 const allowedOrigins = [
-  "http://localhost:5173",
   "https://ashwinn-si.github.io",
   "https://portfolio-ashwinsi.vercel.app",
-  "http://localhost:3000",
   "https://cgpa-gpa-calculator-two.vercel.app",
   "https://jimmy-bday.vercel.app",
   "https://jeevu-bday.vercel.app"
 ];
+
+// Add localhost origins if in development environment
+if (process.env.ENV === "DEV") {
+  allowedOrigins.push("http://localhost:5173", "http://localhost:3000");
+}
 
 app.use(
   cors({
