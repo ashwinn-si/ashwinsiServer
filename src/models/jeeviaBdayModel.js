@@ -9,4 +9,4 @@ const jeeviaBdaySchema = new mongoose.Schema({
 
 const jeeviaBdayModel = mongoose.model("jeeviaBdayModel", jeeviaBdaySchema)
 
-module.export = jeeviaBdayModel
+module.exports = jeeviaBdayModel
