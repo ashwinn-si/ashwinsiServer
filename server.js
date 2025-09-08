@@ -23,7 +23,7 @@ const allowedOrigins = [
 
 // Add localhost origins if in development environment
 if (process.env.ENV === "DEV") {
-  allowedOrigins.push("http://localhost:5173", "http://localhost:3000");
+  allowedOrigins.push("http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5501");
 }
 
 app.use(
