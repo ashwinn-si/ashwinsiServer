@@ -11,7 +11,7 @@ const internalRoute = require("./src/routes/internalMarkCal")
 const gpaCgpaCal = require("./src/routes/gpaCgpaCal")
 const bdayRoute = require("./src/routes/bday")
 
-const PORT = parseInt(process.env.PORT);
+const PORT = parseInt(process.env.PORT) || 5001;
 app.use(morgan("dev"))
 app.use(express.json());
 const allowedOrigins = [
