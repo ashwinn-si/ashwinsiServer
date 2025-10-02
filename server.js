@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const morgan = require("morgan")
 const cookieParser = require("cookie-parser")
 
 const portfolioRouter = require("./src/routes/portfolio");
@@ -10,6 +11,8 @@ const internalRoute = require("./src/routes/internalMarkCal")
 const gpaCgpaCal = require("./src/routes/gpaCgpaCal")
 const bdayRoute = require("./src/routes/bday")
 
+const PORT = parseInt(process.env.PORT);
+app.use(morgan("dev"))
 app.use(express.json());
 const allowedOrigins = [
   "https://ashwinn-si.github.io",
@@ -48,6 +51,6 @@ app.use("/gpa-cgpa-cal", gpaCgpaCal);
 app.use("/bday", bdayRoute)
 
 dbConnect();
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
