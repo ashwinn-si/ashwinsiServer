@@ -18,6 +18,7 @@ const allowedOrigins = [
   "https://ashwinn-si.github.io",
   "https://portfolio-ashwinsi.vercel.app",
   "https://portfolio.ashwinsi.in",
+  "https://ashwinsi.in",
   "https://cgpa-gpa-calculator-two.vercel.app",
   "https://portfolio-ashwinsi.vercel.app/admin",
   "https://jimmy-bday.vercel.app",
