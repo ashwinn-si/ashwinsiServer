@@ -22,7 +22,8 @@ const allowedOrigins = [
   "https://cgpa-gpa-calculator-two.vercel.app",
   "https://portfolio-ashwinsi.vercel.app/admin",
   "https://jimmy-bday.vercel.app",
-  "https://jeevu-bday.vercel.app"
+  "https://jeevu-bday.vercel.app",
+  "https://internalmarkcal.ashwinsi.in"
 ];
 
 // Add localhost origins if in development environment
@@ -30,14 +31,31 @@ if (process.env.ENV === "DEV") {
   allowedOrigins.push("http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5501");
 }
 
+// Allow any subdomain of ashwinsi.in plus the explicit allowedOrigins
+const allowedSuffixes = ["ashwinsi.in"];
+
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+      if (!origin) {
+        // allow requests with no origin (like curl, Postman, or same-origin)
+        return callback(null, true);
       }
+
+      try {
+        const host = new URL(origin).hostname;
+
+        const isExplicitAllowed = allowedOrigins.includes(origin);
+        const matchesSuffix = allowedSuffixes.some(suffix => host === suffix || host.endsWith("." + suffix));
+
+        if (isExplicitAllowed || matchesSuffix) {
+          return callback(null, true);
+        }
+      } catch (err) {
+        // fall through to reject on invalid origin format
+      }
+
+      callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
   })
