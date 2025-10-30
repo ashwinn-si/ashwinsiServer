@@ -6,11 +6,11 @@ const countController = require("../controllers/adminController/countController"
 const addAdminController = require("../controllers/adminController/addAdmin")
 const loginController = require("./../controllers/adminController/login")
 const logoutController = require("./../controllers/adminController/logoutController")
-const  authRequest = require("./../middlewares/authRequest")
+const authRequest = require("./../middlewares/authRequest")
 
-Router.get("/portfolio/count/date",authRequest, dateController)
-Router.get("/count",authRequest, countController)
-Router.post("/addAdmin", addAdminController);
+Router.get("/portfolio/count/date", authRequest, dateController)
+Router.get("/count", authRequest, countController)
+Router.post("/addAdmin", authRequest, addAdminController);
 Router.post("/login", loginController);
 Router.delete("/logout", logoutController);
 module.exports = Router;
