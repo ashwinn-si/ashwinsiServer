@@ -10,6 +10,7 @@ const dbConnect = require("./src/utils/dbConnect")
 const internalRoute = require("./src/routes/internalMarkCal")
 const gpaCgpaCal = require("./src/routes/gpaCgpaCal")
 const bdayRoute = require("./src/routes/bday")
+const websiteRouter = require("./src/routes/analytics")
 
 const PORT = parseInt(process.env.PORT) || 5001;
 app.use(morgan("dev"))
@@ -68,6 +69,7 @@ app.use("/admin", adminRouter)
 app.use("/internalMark", internalRoute)
 app.use("/gpa-cgpa-cal", gpaCgpaCal);
 app.use("/bday", bdayRoute)
+app.use("/website", websiteRouter)
 
 dbConnect();
 app.listen(PORT, () => {
