@@ -1,14 +1,15 @@
 const mongoose = require("mongoose")
 const analyticsSchema = new mongoose.Schema({
   createdAt: {
-    default: Date.now()
+    type: Date,
+    default: Date.now
   },
   website: {
     type: String,
   },
   trafficType: {
     type: String,
-    enum: ["normal", "portfolio", "linkdin"]
+    enum: ["normal", "portfolio", "linkedin"]
   }
 })
 
