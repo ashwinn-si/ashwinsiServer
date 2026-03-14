@@ -14,8 +14,8 @@ router.get("/count/date", authRequest, dateController);
 
 router.get("/getCount", authRequest, async (req, res) => {
   try {
-    const visitCount = await internalMarkCalCountModel.countDocuments();
     const calCount = await internalMarkModel.countDocuments();
+    const visitCount = calCount;
 
     res.status(200).json({
       visitCount,
