@@ -1,4 +1,5 @@
-const analyticModel = require("./../../models/analyticsModel")
+const analyticModel = require("./../../models/analyticsModel");
+const websiteModel = require("./../../models/websiteModel");
 
 const addAnalyticDetails = async (req, res) => {
   try {
@@ -56,10 +57,10 @@ const getAnalyticDetails = async (req, res) => {
 
     // Get analytics data based on query
     const analyticsData = await analyticModel.find(query).select([
+      "_id",
       "website",
       "trafficType",
-      "createdAt",
-      "-_id"
+      "createdAt"
     ]);
 
     // Aggregate traffic types
@@ -85,6 +86,7 @@ const getAnalyticDetails = async (req, res) => {
       );
 
       return {
+        _id: element._id,
         website: element.website,
         trafficType: element.trafficType,
         time: createdAtIST.split(",")[1].trim().split(" ")[0],
@@ -114,4 +116,56 @@ const getAnalyticDetails = async (req, res) => {
   }
 }
 
-module.exports = { addAnalyticDetails, getAnalyticDetails }
+}
+
+const deleteAnalyticRecord = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ status: "error", message: "ID is required" });
+    }
+    await analyticModel.findByIdAndDelete(id);
+    res.status(200).json({ status: "success", message: "Record deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ status: "error", message: "Internal server error" });
+  }
+}
+
+const getWebsites = async (req, res) => {
+  try {
+    const websites = await websiteModel.find({}).sort({ createdAt: 1 });
+    res.status(200).json({ status: "success", data: websites });
+  } catch (err) {
+    res.status(500).json({ status: "error", message: "Internal server error" });
+  }
+}
+
+const addWebsite = async (req, res) => {
+  try {
+    const { name } = req.body;
+    if (!name) {
+      return res.status(400).json({ status: "error", message: "Website name is required" });
+    }
+    
+    // Check if it already exists
+    const existing = await websiteModel.findOne({ name });
+    if (existing) {
+      return res.status(400).json({ status: "error", message: "Website already exists" });
+    }
+
+    const newWebsite = new websiteModel({ name });
+    await newWebsite.save();
+    
+    res.status(201).json({ status: "success", data: newWebsite });
+  } catch (err) {
+    res.status(500).json({ status: "error", message: "Internal server error" });
+  }
+}
+
+module.exports = { 
+  addAnalyticDetails, 
+  getAnalyticDetails, 
+  deleteAnalyticRecord,
+  getWebsites,
+  addWebsite
+}

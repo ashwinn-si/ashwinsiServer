@@ -5,10 +5,12 @@ const internalMarkModel = require("../models/internalMark")
 
 const addMarkController = require("../controllers/internalMarkController/addMark")
 const dateController = require("./../controllers/internalMarkController/dateController")
+const backfillNewFields = require("../controllers/internalMarkController/backfillNewFields")
 
 const authRequest = require("./../middlewares/authRequest")
 
 router.post("/addMark", addMarkController)
+router.post("/backfill/new-fields", backfillNewFields)
 
 router.get("/count/date", authRequest, dateController);
 
