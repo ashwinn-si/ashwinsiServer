@@ -116,7 +116,6 @@ const getAnalyticDetails = async (req, res) => {
   }
 }
 
-}
 
 const deleteAnalyticRecord = async (req, res) => {
   try {
