@@ -1,5 +1,10 @@
 const express = require("express");
 const app = express();
+
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 const cors = require("cors");
 const morgan = require("morgan")
 const cookieParser = require("cookie-parser")
